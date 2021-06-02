@@ -28,7 +28,7 @@ module.exports = {
   },
   networks: {
     bsc: {
-      url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+      url: "https://bsc-dataseed.binance.org/",
       accounts: [process.env.ACCOUNT_1, process.env.ACCOUNT_2]
     }
   }

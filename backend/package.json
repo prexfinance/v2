@@ -1,0 +1,17 @@
+{
+  "name": "prediction-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node scheduler.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "ethers": "^5.2.0",
+    "node-schedule": "^2.0.0"
+  }
+}

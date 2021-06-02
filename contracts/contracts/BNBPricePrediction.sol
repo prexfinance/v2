@@ -29,6 +29,7 @@ contract BNBPricePrediction is Ownable, Pausable {
     struct BetInfo {
         Position position;
         uint256 amount;
+        uint256 timestamp;
         bool claimed; // default false
     }
 
@@ -270,6 +271,7 @@ contract BNBPricePrediction is Ownable, Pausable {
         BetInfo storage betInfo = ledger[currentEpoch][msg.sender];
         betInfo.position = Position.Bear;
         betInfo.amount = _amount;
+        betInfo.timestamp = block.timestamp;
         userRounds[msg.sender].push(currentEpoch);
 
         emit BetBear(msg.sender, currentEpoch, _amount);
@@ -295,6 +297,7 @@ contract BNBPricePrediction is Ownable, Pausable {
         BetInfo storage betInfo = ledger[currentEpoch][msg.sender];
         betInfo.position = Position.Bull;
         betInfo.amount = _amount;
+        betInfo.timestamp = block.timestamp;
         userRounds[msg.sender].push(currentEpoch);
 
         emit BetBull(msg.sender, currentEpoch, _amount);
@@ -338,6 +341,13 @@ contract BNBPricePrediction is Ownable, Pausable {
         _safeTransferBUSD(adminAddress, currentTreasuryAmount);
 
         emit ClaimTreasury(currentTreasuryAmount);
+    }
+
+    /**
+     * @dev Return the total number of rounds a user has entered
+     */
+    function getTotalUserRounds(address user) external view returns (uint256) {
+        return userRounds[user].length; 
     }
 
     /**
